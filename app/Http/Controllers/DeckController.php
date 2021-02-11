@@ -4,17 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class DeckController extends Controller
 {
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -23,6 +19,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('decks.index');
+    }
+
+    public function show($id)
+    {
+        return view('decks.show');
+    }
+
+    public function create()
+    {
+        return view('decks.create');
+    }
+
+    public function edit($id)
+    {
+        return view('decks.edit');
     }
 }

@@ -10944,3 +10944,20 @@ a.text-dark:focus {
   }
 }
 
+.cm-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.cm-hero__jumbotron {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cm-hero__jumbotron--fh {
+  flex-grow: 1;
+}
+
