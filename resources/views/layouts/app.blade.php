@@ -22,7 +22,7 @@
 </head>
 
 <body class="min-vh-100 d-flex flex-column">
-    <nav class="navbar navbar-expand-md navbar-light bg-white">
+    <nav class="navbar navbar-expand-md navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
@@ -70,12 +70,17 @@
             </div>
         </div>
     </nav>
+    @isset($pageTitle)
+    @include('inc.hero')
+    @endisset
 
     @yield('content')
 
-    <footer class="p-4 bg-white mt-auto">
-        <div class="container">
-            <span class="text-muted">Ajouter le contenu du footer</span>
+    <footer class=" mt-auto">
+        <div class="navbar navbar-expand-md p-4">
+            <div class="container">
+                <span class="text-muted">Ajouter le contenu du footer</span>
+            </div>
         </div>
     </footer>
 </body>

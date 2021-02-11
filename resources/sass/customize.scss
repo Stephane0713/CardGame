@@ -1,10 +1,13 @@
-//main
+// Hero
 
 .cm-hero {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex-grow: 1;
+
+    &--fh {
+        flex-grow: 1;
+    }
 
     &__jumbotron {
         display: flex;
@@ -14,5 +17,65 @@
 
     &__jumbotron--fh {
         flex-grow: 1;
+    }
+}
+
+// Deck
+
+.cm-deck {
+    position: relative;
+
+    $img-height: 200px;
+
+    &__img {
+        height: $img-height;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    &__link {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        line-height: $img-height;
+        opacity: 0;
+        background-color: rgba($gray-900, 0.5);
+    }
+
+    &__link:hover {
+        opacity: 1;
+    }
+}
+
+// Card
+
+.cm-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1.25rem;
+}
+
+.cm-card {
+    position: relative;
+    max-width: 240px;
+
+    &__img {
+        height: 160px;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    &__cost {
+        position: absolute;
+        top: 1.25rem;
+        right: 1.25rem;
+    }
+
+    &__description {
+        font-size: 80%;
     }
 }

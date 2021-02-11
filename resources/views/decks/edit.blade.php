@@ -2,6 +2,6 @@
 
 @section('content')
 <div class="container">
-    <h1 class="title">decks.edit</h1>
+
 </div>
 @endsection
