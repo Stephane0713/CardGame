@@ -1,3 +1,50 @@
+// variables
+$bg-card: linear-gradient(
+        216deg,
+        rgba(77, 77, 77, 0.05) 0%,
+        rgba(77, 77, 77, 0.05) 25%,
+        rgba(42, 42, 42, 0.05) 25%,
+        rgba(42, 42, 42, 0.05) 38%,
+        rgba(223, 223, 223, 0.05) 38%,
+        rgba(223, 223, 223, 0.05) 75%,
+        rgba(36, 36, 36, 0.05) 75%,
+        rgba(36, 36, 36, 0.05) 100%
+    ),
+    linear-gradient(
+        44deg,
+        rgba(128, 128, 128, 0.05) 0%,
+        rgba(128, 128, 128, 0.05) 34%,
+        rgba(212, 212, 212, 0.05) 34%,
+        rgba(212, 212, 212, 0.05) 57%,
+        rgba(25, 25, 25, 0.05) 57%,
+        rgba(25, 25, 25, 0.05) 89%,
+        rgba(135, 135, 135, 0.05) 89%,
+        rgba(135, 135, 135, 0.05) 100%
+    ),
+    linear-gradient(
+        241deg,
+        rgba(55, 55, 55, 0.05) 0%,
+        rgba(55, 55, 55, 0.05) 14%,
+        rgba(209, 209, 209, 0.05) 14%,
+        rgba(209, 209, 209, 0.05) 60%,
+        rgba(245, 245, 245, 0.05) 60%,
+        rgba(245, 245, 245, 0.05) 69%,
+        rgba(164, 164, 164, 0.05) 69%,
+        rgba(164, 164, 164, 0.05) 100%
+    ),
+    linear-gradient(
+        249deg,
+        rgba(248, 248, 248, 0.05) 0%,
+        rgba(248, 248, 248, 0.05) 32%,
+        rgba(148, 148, 148, 0.05) 32%,
+        rgba(148, 148, 148, 0.05) 35%,
+        rgba(202, 202, 202, 0.05) 35%,
+        rgba(202, 202, 202, 0.05) 51%,
+        rgba(181, 181, 181, 0.05) 51%,
+        rgba(181, 181, 181, 0.05) 100%
+    ),
+    linear-gradient(92deg, hsl(214, 0%, 11%), hsl(214, 0%, 11%));
+
 // Hero
 
 .cm-hero {
@@ -52,30 +99,63 @@
 
 // Card
 
-.cm-cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 1.25rem;
-}
-
 .cm-card {
-    position: relative;
-    max-width: 240px;
+    --spacing: 0.75rem;
+    padding: var(--spacing);
+    background-image: $bg-card;
+    border: 2px solid;
+    border-top-color: $gray-500;
+    border-right-color: $gray-600;
+    border-bottom-color: $gray-700;
+    border-left-color: $gray-800;
+
+    &__upper {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__name {
+        margin: 0;
+        font-size: 1rem;
+    }
 
     &__img {
-        height: 160px;
-        object-fit: cover;
-        object-position: center;
+        padding-bottom: 50%;
+        background-size: cover;
+        background-position: center center;
+        margin: var(--spacing) 0;
     }
 
-    &__cost {
-        position: absolute;
-        top: 1.25rem;
-        right: 1.25rem;
+    &__text {
+        margin: 0.5rem 0;
+        padding: 0.5rem;
+        font-size: 60%;
+        background-color: rgba($black, 0.5);
+        height: 4rem;
     }
 
-    &__description {
-        font-size: 80%;
+    &__score {
+        text-align: right;
+    }
+
+    &--minimized {
+        display: flex;
+        justify-content: space-between;
+
+        .cm-card {
+            &__text,
+            &__score,
+            &__cost {
+                display: none;
+            }
+
+            &__img {
+                order: 1;
+                width: 50%;
+                padding: 0;
+                margin: calc(var(--spacing) * -1);
+                margin-left: 0;
+            }
+        }
     }
 }

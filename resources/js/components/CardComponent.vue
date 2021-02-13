@@ -1,23 +1,30 @@
 <template>
-    <div class="card cm-card">
-        <div class="card-body">
-            <h5 class="card-title">Name</h5>
-            <p class="card-text cm-card__cost">3</p>
-            <img
-                src="/assets/cat_01.jpg"
-                alt=""
-                class="card-img cm-card__img"
-            />
-            <p class="card-text mt-1">Type</p>
-            <p class="card-text cm-card__description">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Excepturi assumenda molestias obcaecati.
-            </p>
-            <p class="card-text text-right">30</p>
+    <div class="cm-card" :class="{ 'cm-card--minimized': minimized }">
+        <div class="cm-card__upper">
+            <h5 class="cm-card__name">Name</h5>
+            <div class="cm-card__cost">3</div>
         </div>
+        <div
+            class="cm-card__img"
+            :style="{ 'background-image': 'url(\'/assets/cat_01.jpg\')' }"
+        ></div>
+        <div class="cm-card__type">Type</div>
+        <div class="cm-card__text">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi
+            tempore itaque veniam.
+        </div>
+        <div class="cm-card__score">30</div>
     </div>
 </template>
 
 <script>
-export default {};
+export default {
+    props: {
+        minimized: {
+            type: Boolean,
+            required: false,
+            default: false
+        }
+    }
+};
 </script>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// ADDS BASIC CARD COLLECTION TO CARDS TABLE
+// Route::get('/setup', 'CardController@setup');
 
 Auth::routes();
 
