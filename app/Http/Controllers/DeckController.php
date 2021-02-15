@@ -32,15 +32,23 @@ class DeckController extends Controller
      */
     public function index()
     {
+        $user = $this->getUserId();
+        $decks = Deck::where('user_id', $user)->get();
+
         return view('decks.index', [
-            'pageTitle' => 'Vos Decks'
+            'pageTitle' => 'Vos Decks',
+            'decks' => $decks
         ]);
     }
 
     public function show($id)
     {
+        $deck = Deck::findOrFail($id);
+        $cards = $deck->cards;
         return view('decks.show', [
-            'pageTitle' => 'Nom du Deck'
+            'pageTitle' => "Deck : $deck->id",
+            'deck' => $deck,
+            'cards' => $cards
         ]);
     }
 
@@ -51,10 +59,51 @@ class DeckController extends Controller
         ]);
     }
 
+    public function store()
+    {
+        $deck = new Deck;
+
+        $deck->user_id = $this->getUserId();
+        $deck->save();
+
+        $cards = request('cards');
+        $deck->cards()->attach($cards);
+
+
+        return redirect('/decks');
+    }
+
     public function edit($id)
     {
+        $deck = Deck::findOrFail($id);
+        $cards = $deck->cards;
         return view('decks.edit', [
-            'pageTitle' => 'Editer nom du Deck'
+            'pageTitle' => "Editer Deck : $deck->id",
+            'deck' => $deck,
+            'cards' => $cards
         ]);
+    }
+
+    public function update($id)
+    {
+        $user = $this->getUserId();
+        $deck = Deck::where('id', $id)->where('user_id', $user)->first();
+        $deck->save();
+
+        $cards = request('cards');
+
+        $deck->cards()->sync($cards);
+
+        return redirect('/decks');
+    }
+
+    public function destroy($id)
+    {
+        $user = $this->getUserId();
+        $deck = Deck::where('id', $id)->where('user_id', $user);
+
+        $deck->delete();
+
+        return redirect('/decks');
     }
 }

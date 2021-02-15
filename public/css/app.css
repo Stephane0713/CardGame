@@ -11514,20 +11514,22 @@ legend {
   border-right-color: #7a8288;
   border-bottom-color: #52575c;
   border-left-color: #3a3f44;
+  font-size: 0.8rem;
 }
 
 .cm-card__upper {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
 }
 
 .cm-card__name {
+  font-size: 0.8rem;
   margin: 0;
-  font-size: 1rem;
 }
 
 .cm-card__img {
-  padding-bottom: 50%;
+  padding-bottom: 60%;
   background-size: cover;
   background-position: center center;
   margin: var(--spacing) 0;
@@ -11536,7 +11538,7 @@ legend {
 .cm-card__text {
   margin: 0.5rem 0;
   padding: 0.5rem;
-  font-size: 60%;
+  font-size: 70%;
   background-color: rgba(0, 0, 0, 0.5);
   height: 4rem;
 }
@@ -11548,6 +11550,7 @@ legend {
 .cm-card--minimized {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
 }
 
 .cm-card--minimized .cm-card__text,
@@ -11558,9 +11561,10 @@ legend {
 
 .cm-card--minimized .cm-card__img {
   order: 1;
-  width: 50%;
+  width: 40%;
   padding: 0;
   margin: calc(var(--spacing) * -1);
   margin-left: 0;
+  align-self: stretch;
 }
 

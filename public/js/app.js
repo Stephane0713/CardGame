@@ -2003,10 +2003,77 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     CardComponent: _CardComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: {
+    methodIsPut: {
+      type: Boolean,
+      required: false,
+      "default": false
+    },
+    action: {
+      type: String,
+      required: true
+    },
+    cardsData: {
+      type: Array,
+      required: false,
+      "default": []
+    }
+  },
+  mounted: function mounted() {
+    this.getCards();
+    this.selectedCards = this.cardsData;
+  },
+  data: function data() {
+    return {
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
+      cards: [],
+      search: "",
+      selectedCards: []
+    };
+  },
+  methods: {
+    getCards: function getCards() {
+      var _this = this;
+
+      axios.get("/api/cards/get", {
+        params: {
+          search: this.search
+        }
+      }).then(function (response) {
+        return _this.cards = response.data;
+      });
+    },
+    searchCards: function searchCards() {
+      this.getCards();
+    }
   }
 });
 
@@ -2040,13 +2107,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     minimized: {
       type: Boolean,
       required: false,
       "default": false
+    },
+    cardData: {
+      type: Object
     }
+  },
+  data: function data() {
+    return {
+      // card-data
+      id: null,
+      name: "Default",
+      cost: 0,
+      image: "",
+      type: "Default",
+      description: "Default",
+      score: 0
+    };
+  },
+  mounted: function mounted() {
+    this.id = this.cardData.id;
+    this.name = this.cardData.name;
+    this.cost = this.cardData.cost;
+    this.image = this.cardData.image;
+    this.type = this.cardData.type;
+    this.description = this.cardData.description;
+    this.score = this.cardData.score;
   }
 });
 
@@ -37658,93 +37750,137 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "col-12" }, [
+        _c("button", { staticClass: "btn btn-primary" }, [_vm._v("Type")]),
+        _vm._v(" "),
+        _c("button", { staticClass: "btn btn-primary" }, [_vm._v("Type")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.search,
+              expression: "search"
+            }
+          ],
+          staticClass: "form-control my-3",
+          attrs: { type: "text" },
+          domProps: { value: _vm.search },
+          on: {
+            keyup: _vm.searchCards,
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.search = $event.target.value
+            }
+          }
+        })
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-12 col-md-8 order-md-1" }, [
-        _c("div", { staticClass: "row" }, [
-          _c(
-            "div",
-            { staticClass: "col-12 col-sm-6 col-xl-4 mb-3" },
-            [_c("card-component")],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-12 col-sm-6 col-xl-4 mb-3" },
-            [_c("card-component")],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-12 col-sm-6 col-xl-4 mb-3" },
-            [_c("card-component")],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-12 col-sm-6 col-xl-4 mb-3" },
-            [_c("card-component")],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-12 col-sm-6 col-xl-4 mb-3" },
-            [_c("card-component")],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-12 col-sm-6 col-xl-4 mb-3" },
-            [_c("card-component")],
-            1
-          )
-        ])
+        _c(
+          "div",
+          { staticClass: "row" },
+          _vm._l(_vm.cards, function(card) {
+            return _c(
+              "div",
+              { key: card.id, staticClass: "col-12 col-sm-6 col-xl-4 mb-3" },
+              [_c("card-component", { attrs: { "card-data": card } })],
+              1
+            )
+          }),
+          0
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-12 col-md-4" }, [
-        _c("div", { staticClass: "row h-100" }, [
-          _c(
-            "div",
-            { staticClass: "col-12 mb-3" },
-            [_c("card-component", { attrs: { minimized: true } })],
-            1
-          ),
-          _vm._v(" "),
-          _vm._m(1)
+        _c(
+          "div",
+          { staticClass: "row" },
+          _vm._l(_vm.selectedCards, function(selectedCard) {
+            return _c(
+              "div",
+              { key: selectedCard.id, staticClass: "col-12 mb-3" },
+              [
+                _c("card-component", {
+                  attrs: { cardData: selectedCard, minimized: true }
+                })
+              ],
+              1
+            )
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-12 mt-auto" }, [
+            _c("form", { attrs: { action: _vm.action, method: "POST" } }, [
+              _vm.methodIsPut
+                ? _c("input", {
+                    attrs: { type: "hidden", name: "_method", value: "PUT" }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "hidden", name: "_token" },
+                domProps: { value: _vm.csrf }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "hidden", name: "cards[]", value: "1" }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "hidden", name: "cards[]", value: "2" }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "hidden", name: "cards[]", value: "3" }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "hidden", name: "cards[]", value: "4" }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "hidden", name: "cards[]", value: "5" }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "hidden", name: "cards[]", value: "6" }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "hidden", name: "cards[]", value: "7" }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "hidden", name: "cards[]", value: "8" }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "hidden", name: "cards[]", value: "9" }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "hidden", name: "cards[]", value: "12" }
+              }),
+              _vm._v(" "),
+              _c("button", { staticClass: "btn btn-primary w-100 mb-3" }, [
+                _vm._v(
+                  "\n                            Enregister\n                        "
+                )
+              ])
+            ])
+          ])
         ])
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12" }, [
-      _c("button", { staticClass: "btn btn-primary" }, [_vm._v("Type")]),
-      _vm._v(" "),
-      _c("button", { staticClass: "btn btn-primary" }, [_vm._v("Type")]),
-      _vm._v(" "),
-      _c("input", { staticClass: "form-control my-3", attrs: { type: "text" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 mt-auto" }, [
-      _c("button", { staticClass: "btn btn-primary w-100 mb-3" }, [
-        _vm._v("\n                        Enregister\n                    ")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -37770,37 +37906,30 @@ var render = function() {
     "div",
     { staticClass: "cm-card", class: { "cm-card--minimized": _vm.minimized } },
     [
-      _vm._m(0),
+      _c("div", { staticClass: "cm-card__upper" }, [
+        _c("h5", { staticClass: "cm-card__name" }, [_vm._v(_vm._s(_vm.name))]),
+        _vm._v(" "),
+        _c("div", { staticClass: "cm-card__cost" }, [_vm._v(_vm._s(_vm.cost))])
+      ]),
       _vm._v(" "),
       _c("div", {
         staticClass: "cm-card__img",
-        style: { "background-image": "url('/assets/cat_01.jpg')" }
+        style: {
+          "background-image": "url('/assets/" + _vm.image + ".jpg')"
+        }
       }),
       _vm._v(" "),
-      _c("div", { staticClass: "cm-card__type" }, [_vm._v("Type")]),
+      _c("div", { staticClass: "cm-card__type" }, [_vm._v(_vm._s(_vm.type))]),
       _vm._v(" "),
       _c("div", { staticClass: "cm-card__text" }, [
-        _vm._v(
-          "\n        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi\n        tempore itaque veniam.\n    "
-        )
+        _vm._v("\n        " + _vm._s(_vm.description) + "\n    ")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "cm-card__score" }, [_vm._v("30")])
+      _c("div", { staticClass: "cm-card__score" }, [_vm._v(_vm._s(_vm.score))])
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "cm-card__upper" }, [
-      _c("h5", { staticClass: "cm-card__name" }, [_vm._v("Name")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "cm-card__cost" }, [_vm._v("3")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -49996,6 +50125,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 Vue.component('builder-component', __webpack_require__(/*! ./components/BuilderComponent.vue */ "./resources/js/components/BuilderComponent.vue")["default"]);
+Vue.component('card-component', __webpack_require__(/*! ./components/CardComponent.vue */ "./resources/js/components/CardComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

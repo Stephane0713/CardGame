@@ -7,6 +7,15 @@ use App\Card;
 
 class CardController extends Controller
 {
+    public function get()
+    {
+        $search = request('search');
+
+        $cards = Card::where('name', 'like', '%' . $search . '%')->get();
+
+        return $cards;
+    }
+
     public function setup()
     {
         $collection = [

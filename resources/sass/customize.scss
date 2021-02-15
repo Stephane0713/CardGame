@@ -108,19 +108,21 @@ $bg-card: linear-gradient(
     border-right-color: $gray-600;
     border-bottom-color: $gray-700;
     border-left-color: $gray-800;
+    font-size: 0.8rem;
 
     &__upper {
         display: flex;
         justify-content: space-between;
+        align-items: baseline;
     }
 
     &__name {
+        font-size: 0.8rem;
         margin: 0;
-        font-size: 1rem;
     }
 
     &__img {
-        padding-bottom: 50%;
+        padding-bottom: 60%;
         background-size: cover;
         background-position: center center;
         margin: var(--spacing) 0;
@@ -129,7 +131,7 @@ $bg-card: linear-gradient(
     &__text {
         margin: 0.5rem 0;
         padding: 0.5rem;
-        font-size: 60%;
+        font-size: 70%;
         background-color: rgba($black, 0.5);
         height: 4rem;
     }
@@ -141,6 +143,7 @@ $bg-card: linear-gradient(
     &--minimized {
         display: flex;
         justify-content: space-between;
+        align-items: baseline;
 
         .cm-card {
             &__text,
@@ -151,10 +154,11 @@ $bg-card: linear-gradient(
 
             &__img {
                 order: 1;
-                width: 50%;
+                width: 40%;
                 padding: 0;
                 margin: calc(var(--spacing) * -1);
                 margin-left: 0;
+                align-self: stretch;
             }
         }
     }

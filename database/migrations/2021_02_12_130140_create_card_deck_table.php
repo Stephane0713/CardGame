@@ -19,8 +19,8 @@ class CreateCardDeckTable extends Migration
         });
 
         Schema::table('card_deck', function (Blueprint $table) {
-            $table->foreign('card_id')->references('id')->on('cards');
-            $table->foreign('deck_id')->references('id')->on('decks');
+            $table->foreign('card_id')->references('id')->on('cards')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('deck_id')->references('id')->on('decks')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

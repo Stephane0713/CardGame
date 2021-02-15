@@ -1,19 +1,20 @@
 <template>
     <div class="cm-card" :class="{ 'cm-card--minimized': minimized }">
         <div class="cm-card__upper">
-            <h5 class="cm-card__name">Name</h5>
-            <div class="cm-card__cost">3</div>
+            <h5 class="cm-card__name">{{ name }}</h5>
+            <div class="cm-card__cost">{{ cost }}</div>
         </div>
         <div
             class="cm-card__img"
-            :style="{ 'background-image': 'url(\'/assets/cat_01.jpg\')' }"
+            :style="{
+                'background-image': 'url(\'/assets/' + image + '.jpg\')'
+            }"
         ></div>
-        <div class="cm-card__type">Type</div>
+        <div class="cm-card__type">{{ type }}</div>
         <div class="cm-card__text">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi
-            tempore itaque veniam.
+            {{ description }}
         </div>
-        <div class="cm-card__score">30</div>
+        <div class="cm-card__score">{{ score }}</div>
     </div>
 </template>
 
@@ -24,7 +25,31 @@ export default {
             type: Boolean,
             required: false,
             default: false
+        },
+        cardData: {
+            type: Object
         }
+    },
+    data() {
+        return {
+            // card-data
+            id: null,
+            name: "Default",
+            cost: 0,
+            image: "",
+            type: "Default",
+            description: "Default",
+            score: 0
+        };
+    },
+    mounted() {
+        this.id = this.cardData.id;
+        this.name = this.cardData.name;
+        this.cost = this.cardData.cost;
+        this.image = this.cardData.image;
+        this.type = this.cardData.type;
+        this.description = this.cardData.description;
+        this.score = this.cardData.score;
     }
 };
 </script>

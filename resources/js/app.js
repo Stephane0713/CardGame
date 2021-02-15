@@ -22,6 +22,7 @@ window.Vue = require('vue');
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 Vue.component('builder-component', require('./components/BuilderComponent.vue').default);
+Vue.component('card-component', require('./components/CardComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -32,3 +33,4 @@ Vue.component('builder-component', require('./components/BuilderComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+
