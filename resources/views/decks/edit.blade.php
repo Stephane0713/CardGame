@@ -2,6 +2,6 @@
 
 @section('content')
 <div id="app">
-    <builder-component :cards-data="{{$cards}}" :method-is-put="true" action="{{ route('decks.update', $deck->id) }}" />
+    <builder-component :cards-data="{{json_encode($cards)}}" :method-is-put="true" action="{{ route('decks.update', $deck->id) }}" />
 </div>
 @endsection

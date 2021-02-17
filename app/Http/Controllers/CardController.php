@@ -10,8 +10,13 @@ class CardController extends Controller
     public function get()
     {
         $search = request('search');
+        $types = request('types');
 
-        $cards = Card::where('name', 'like', '%' . $search . '%')->get();
+        if (empty($types)) {
+            $types = [null];
+        }
+
+        $cards = Card::where('name', 'like', '%' . $search . '%')->whereIn('type', $types)->get();
 
         return $cards;
     }

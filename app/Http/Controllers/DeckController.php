@@ -76,11 +76,18 @@ class DeckController extends Controller
     public function edit($id)
     {
         $deck = Deck::findOrFail($id);
+
         $cards = $deck->cards;
+        $cardsId = [];
+
+        foreach ($cards as $card) {
+            array_push($cardsId, $card->id);
+        }
+
         return view('decks.edit', [
             'pageTitle' => "Editer Deck : $deck->id",
             'deck' => $deck,
-            'cards' => $cards
+            'cards' => $cardsId,
         ]);
     }
 
