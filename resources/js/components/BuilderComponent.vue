@@ -49,7 +49,7 @@
                     <div
                         class="col-12 col-sm-6 col-xl-4 mb-3"
                         :class="{
-                            disabled: selectedCards.includes(card)
+                            disabled: selectedCardsId.includes(card.id)
                         }"
                         v-for="card in cards"
                         :key="card.id"
@@ -62,15 +62,12 @@
             <div class="col-12 col-md-4">
                 <div class="mb-3">{{ selectedCards.length }} / 10</div>
                 <div
-                    class="mb-3"
+                    class="mb-3 alert alert-primary"
                     v-for="(selectedCard, index) in selectedCards"
                     :key="selectedCard.id"
                     @click="unselectCard(index)"
                 >
-                    <card-component
-                        :cardData="selectedCard"
-                        :minimized="true"
-                    />
+                    {{ selectedCard.name }}
                 </div>
                 <form :action="action" method="POST" @submit="isReqValid">
                     <input
@@ -129,6 +126,7 @@ export default {
             cards: [],
             search: "",
             selectedCards: [],
+            selectedCardsId: [],
             types: ["cat", "dog"]
         };
     },
@@ -154,6 +152,7 @@ export default {
             for (let i = 0; i < cards.length; i++) {
                 if (this.cardsData.includes(cards[i].id)) {
                     this.selectedCards.push(cards[i]);
+                    this.selectedCardsId.push(cards[i].id);
                 }
             }
         },
@@ -162,14 +161,16 @@ export default {
         },
         selectCard(card) {
             if (
-                !this.selectedCards.includes(card) &&
+                !this.selectedCardsId.includes(card.id) &&
                 this.selectedCards.length < 10
             ) {
                 this.selectedCards.push(card);
+                this.selectedCardsId.push(card.id);
             }
         },
         unselectCard(index) {
             this.selectedCards.splice(index, 1);
+            this.selectedCardsId.splice(index, 1);
         },
         isReqValid(event) {
             if (this.selectedCards.length < 10) {

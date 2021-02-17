@@ -2073,9 +2073,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2112,6 +2109,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       cards: [],
       search: "",
       selectedCards: [],
+      selectedCardsId: [],
       types: ["cat", "dog"]
     };
   },
@@ -2162,6 +2160,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       for (var i = 0; i < cards.length; i++) {
         if (this.cardsData.includes(cards[i].id)) {
           this.selectedCards.push(cards[i]);
+          this.selectedCardsId.push(cards[i].id);
         }
       }
     },
@@ -2169,12 +2168,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.getCards();
     },
     selectCard: function selectCard(card) {
-      if (!this.selectedCards.includes(card) && this.selectedCards.length < 10) {
+      if (!this.selectedCardsId.includes(card.id) && this.selectedCards.length < 10) {
         this.selectedCards.push(card);
+        this.selectedCardsId.push(card.id);
       }
     },
     unselectCard: function unselectCard(index) {
       this.selectedCards.splice(index, 1);
+      this.selectedCardsId.splice(index, 1);
     },
     isReqValid: function isReqValid(event) {
       if (this.selectedCards.length < 10) {
@@ -39409,7 +39410,7 @@ var render = function() {
                 key: card.id,
                 staticClass: "col-12 col-sm-6 col-xl-4 mb-3",
                 class: {
-                  disabled: _vm.selectedCards.includes(card)
+                  disabled: _vm.selectedCardsId.includes(card.id)
                 },
                 on: {
                   click: function($event) {
@@ -39438,7 +39439,7 @@ var render = function() {
               "div",
               {
                 key: selectedCard.id,
-                staticClass: "mb-3",
+                staticClass: "mb-3 alert alert-primary",
                 on: {
                   click: function($event) {
                     return _vm.unselectCard(index)
@@ -39446,11 +39447,12 @@ var render = function() {
                 }
               },
               [
-                _c("card-component", {
-                  attrs: { cardData: selectedCard, minimized: true }
-                })
-              ],
-              1
+                _vm._v(
+                  "\n                " +
+                    _vm._s(selectedCard.name) +
+                    "\n            "
+                )
+              ]
             )
           }),
           _vm._v(" "),
