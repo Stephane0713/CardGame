@@ -20,10 +20,10 @@ class DeckController extends Controller
         return Auth::user()->id;
     }
 
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Show the application dashboard.
