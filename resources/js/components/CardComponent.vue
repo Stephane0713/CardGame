@@ -1,5 +1,5 @@
 <template>
-    <div class="cm-card" :class="{ 'cm-card--minimized': minimized }">
+    <div class="cm-card">
         <div class="cm-card__upper">
             <h5 class="cm-card__name">{{ name }}</h5>
             <div class="cm-card__cost">{{ cost }}</div>
@@ -21,11 +21,6 @@
 <script>
 export default {
     props: {
-        minimized: {
-            type: Boolean,
-            required: false,
-            default: false
-        },
         cardData: {
             type: Object
         }

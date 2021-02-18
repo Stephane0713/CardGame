@@ -2073,6 +2073,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2218,11 +2226,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    minimized: {
-      type: Boolean,
-      required: false,
-      "default": false
-    },
     cardData: {
       type: Object
     }
@@ -39411,15 +39414,23 @@ var render = function() {
                 staticClass: "col-12 col-sm-6 col-xl-4 mb-3",
                 class: {
                   disabled: _vm.selectedCardsId.includes(card.id)
-                },
-                on: {
-                  click: function($event) {
-                    return _vm.selectCard(card)
-                  }
                 }
               },
-              [_c("card-component", { attrs: { "card-data": card } })],
-              1
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "cm-clickable",
+                    on: {
+                      click: function($event) {
+                        return _vm.selectCard(card)
+                      }
+                    }
+                  },
+                  [_c("card-component", { attrs: { "card-data": card } })],
+                  1
+                )
+              ]
             )
           }),
           0
@@ -39437,20 +39448,27 @@ var render = function() {
           _vm._l(_vm.selectedCards, function(selectedCard, index) {
             return _c(
               "div",
-              {
-                key: selectedCard.id,
-                staticClass: "mb-3 alert alert-primary",
-                on: {
-                  click: function($event) {
-                    return _vm.unselectCard(index)
-                  }
-                }
-              },
+              { key: selectedCard.id, staticClass: "mb-3 d-flex" },
               [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(selectedCard.name) +
-                    "\n            "
+                _c("div", { staticClass: "alert alert-primary flex-fill" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(selectedCard.name) +
+                      "\n                "
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "alert alert-danger cm-clickable",
+                    on: {
+                      click: function($event) {
+                        return _vm.unselectCard(index)
+                      }
+                    }
+                  },
+                  [_vm._v("\n                    -\n                ")]
                 )
               ]
             )
@@ -39516,32 +39534,28 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "cm-card", class: { "cm-card--minimized": _vm.minimized } },
-    [
-      _c("div", { staticClass: "cm-card__upper" }, [
-        _c("h5", { staticClass: "cm-card__name" }, [_vm._v(_vm._s(_vm.name))]),
-        _vm._v(" "),
-        _c("div", { staticClass: "cm-card__cost" }, [_vm._v(_vm._s(_vm.cost))])
-      ]),
+  return _c("div", { staticClass: "cm-card" }, [
+    _c("div", { staticClass: "cm-card__upper" }, [
+      _c("h5", { staticClass: "cm-card__name" }, [_vm._v(_vm._s(_vm.name))]),
       _vm._v(" "),
-      _c("div", {
-        staticClass: "cm-card__img",
-        style: {
-          "background-image": "url('/assets/" + _vm.image + ".jpg')"
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "cm-card__type" }, [_vm._v(_vm._s(_vm.type))]),
-      _vm._v(" "),
-      _c("div", { staticClass: "cm-card__text" }, [
-        _vm._v("\n        " + _vm._s(_vm.description) + "\n    ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "cm-card__score" }, [_vm._v(_vm._s(_vm.score))])
-    ]
-  )
+      _c("div", { staticClass: "cm-card__cost" }, [_vm._v(_vm._s(_vm.cost))])
+    ]),
+    _vm._v(" "),
+    _c("div", {
+      staticClass: "cm-card__img",
+      style: {
+        "background-image": "url('/assets/" + _vm.image + ".jpg')"
+      }
+    }),
+    _vm._v(" "),
+    _c("div", { staticClass: "cm-card__type" }, [_vm._v(_vm._s(_vm.type))]),
+    _vm._v(" "),
+    _c("div", { staticClass: "cm-card__text" }, [
+      _vm._v("\n        " + _vm._s(_vm.description) + "\n    ")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "cm-card__score" }, [_vm._v(_vm._s(_vm.score))])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

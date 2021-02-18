@@ -53,21 +53,29 @@
                         }"
                         v-for="card in cards"
                         :key="card.id"
-                        @click="selectCard(card)"
                     >
-                        <card-component :card-data="card" />
+                        <div @click="selectCard(card)" class="cm-clickable">
+                            <card-component :card-data="card" />
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-md-4">
                 <div class="mb-3">{{ selectedCards.length }} / 10</div>
                 <div
-                    class="mb-3 alert alert-primary"
+                    class="mb-3 d-flex"
                     v-for="(selectedCard, index) in selectedCards"
                     :key="selectedCard.id"
-                    @click="unselectCard(index)"
                 >
-                    {{ selectedCard.name }}
+                    <div class="alert alert-primary flex-fill">
+                        {{ selectedCard.name }}
+                    </div>
+                    <div
+                        class="alert alert-danger cm-clickable"
+                        @click="unselectCard(index)"
+                    >
+                        -
+                    </div>
                 </div>
                 <form :action="action" method="POST" @submit="isReqValid">
                     <input

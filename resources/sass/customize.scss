@@ -139,27 +139,10 @@ $bg-card: linear-gradient(
     &__score {
         text-align: right;
     }
+}
 
-    &--minimized {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
+// Clickable
 
-        .cm-card {
-            &__text,
-            &__score,
-            &__cost {
-                display: none;
-            }
-
-            &__img {
-                order: 1;
-                width: 40%;
-                padding: 0;
-                margin: calc(var(--spacing) * -1);
-                margin-left: 0;
-                align-self: stretch;
-            }
-        }
-    }
+.cm-clickable {
+    cursor: pointer;
 }

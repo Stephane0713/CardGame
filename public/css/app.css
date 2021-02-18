@@ -11547,24 +11547,7 @@ legend {
   text-align: right;
 }
 
-.cm-card--minimized {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.cm-card--minimized .cm-card__text,
-.cm-card--minimized .cm-card__score,
-.cm-card--minimized .cm-card__cost {
-  display: none;
-}
-
-.cm-card--minimized .cm-card__img {
-  order: 1;
-  width: 40%;
-  padding: 0;
-  margin: calc(var(--spacing) * -1);
-  margin-left: 0;
-  align-self: stretch;
+.cm-clickable {
+  cursor: pointer;
 }
 
